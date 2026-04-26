@@ -26,27 +26,27 @@ done
 
 # [步骤 1] 按需重新打包 Rootfs
 if [ "$DO_PACK" = true ]; then
-    echo "📦 [1/3] 正在重新打包 Rootfs..."
+    echo " [1/3] 正在重新打包 Rootfs..."
     cd $ROOTFS_DIR
     find . -print0 | cpio --null -ov --format=newc | gzip -9 > $ROOTFS_IMG
 fi
 
 # [步骤 2] 自动增量编译内核
-echo "🔨 [2/3] 正在检查并增量编译内核..."
+echo " [2/3] 正在检查并增量编译内核..."
 cd $KERNEL_DIR
 make -j$(nproc) bzImage
 if [ $? -ne 0 ]; then
-    echo "❌ 编译失败！请检查代码语法错误。"
+    echo " 编译失败！请检查代码语法错误。"
     exit 1
 fi
 
 # [步骤 3] 启动 QEMU 虚拟机
 cd $WORKSPACE
-# 日志双写并设置 signal=off（完美解决 Ctrl+C 误退虚拟机的问题）
+# 日志双写并设置 signal=off
 LOGGING_OPT="-chardev stdio,id=char0,logfile=$LOG_FILE,mux=on,signal=off -serial chardev:char0 -mon chardev=char0"
 
 if [ "$DO_DEBUG" = true ]; then
-    echo "🐛 [3/3] 启动 QEMU (调试模式)... 等待 GDB 接入 (:1234)"
+    echo " [3/3] 启动 QEMU (调试模式)... 等待 GDB 接入 (:1234)"
     qemu-system-x86_64 \
         -kernel $KERNEL_BZIMAGE -initrd $ROOTFS_IMG \
         -append "console=ttyS0 nokaslr loglevel=8" \
@@ -55,8 +55,8 @@ if [ "$DO_DEBUG" = true ]; then
         $NETWORK_OPT $SHARE_OPT $LOGGING_OPT \
         -s -S
 else
-    echo "🚀 [3/3] 启动 QEMU (全速模式)... 崩溃日志实时保存在 share/kernel_crash.log"
-    echo "💡 提示：按 Ctrl+C 中断内部程序；按 Ctrl+A 然后按 X 强制退出虚拟机"
+    echo " [3/3] 启动 QEMU (全速模式)... 崩溃日志实时保存在 share/kernel_crash.log"
+    echo " 提示：按 Ctrl+C 中断内部程序；按 Ctrl+A 然后按 X 强制退出虚拟机"
     qemu-system-x86_64 \
         -kernel $KERNEL_BZIMAGE -initrd $ROOTFS_IMG \
         -append "console=ttyS0 nokaslr quiet" \
