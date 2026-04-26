@@ -1,0 +1,52 @@
+udhcpc: started, v1.36.1
+udhcpc: broadcasting discover
+udhcpc: broadcasting discover
+udhcpc: broadcasting select for 10.0.2.15, server 10.0.2.2
+udhcpc: lease of 10.0.2.15 obtained from 10.0.2.2, lease time 86400
+
+=======================================================
+  🎉 Linux 6.19.8 Dev Environment Boot Success!
+  [网络就绪] 动态IP、路由、DNS 已自动完成配置！
+  [宿主挂载] 共享目录位于: /mnt/share
+=======================================================
+
+
+
+BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+~ # [6ncd /m~ # cd /mnt/[Js~ # cd /mnt/share/[J
+/mnt/share # [6ncd m/mnt/share # cd modules/[J
+/mnt/share/modules # [6nls
+Makefile  hello-1
+/mnt/share/modules # [6ncd h/mnt/share/modules # cd hello-1/[J
+/mnt/share/modules/hello-1 # [6nls
+Makefile        hello-1.ko      hello-1.mod.o
+Module.symvers  hello-1.mod     hello-1.o
+hello-1.c       hello-1.mod.c   modules.order
+/mnt/share/modules/hello-1 # [6ninsom[J[Jmod h/mnt/share/modules/hello-1 # insmod hello-1.[Jk/mnt/share/modules/hello-1 # insmod hello-1.ko [J
+/mnt/share/modules/hello-1 # [6ndmesg | tail -10
+[    0.658037]   with environment:
+[    0.658037]     HOME=/
+[    0.658038]     TERM=linux
+[    0.660182] mount (75) used greatest stack depth: 13928 bytes left
+[    0.670580] ip (83) used greatest stack depth: 13496 bytes left
+[    1.094711] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input3
+[    2.728008] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[    3.814352] ip (85) used greatest stack depth: 12976 bytes left
+[   17.145134] hello_1: loading out-of-tree module taints kernel.
+[   17.145302] Hello!
+/mnt/share/modules/hello-1 # [6nm[Jrmmod h/mnt/share/modules/hello-1 # rmmod hello-1.[J[J
+/mnt/share/modules/hello-1 # [6n/mnt/share/modules/hello-1 # rmmod hello-1[J/mnt/share/modules/hello-1 # dmesg | tail -10[J
+[    0.658037]     HOME=/
+[    0.658038]     TERM=linux
+[    0.660182] mount (75) used greatest stack depth: 13928 bytes left
+[    0.670580] ip (83) used greatest stack depth: 13496 bytes left
+[    1.094711] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input3
+[    2.728008] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[    3.814352] ip (85) used greatest stack depth: 12976 bytes left
+[   17.145134] hello_1: loading out-of-tree module taints kernel.
+[   17.145302] Hello!
+[   32.001133] Goodbye!
+/mnt/share/modules/hello-1 # [6nQEMU: Terminated
+

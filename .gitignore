@@ -1,0 +1,18 @@
+# 内核源码
+linux-6.19.8/
+linux-6.19.8.tar.xz
+
+# 根文件系统
+rootfs/
+rootfs.cpio.gz
+
+# 所有模块编译过程中产生的文件
+*.ko
+*.o
+*.cmd
+*.mod
+*.mod.c
+*.mod.o
+Module.symvers
+modules.order
+.tmp_versions/
